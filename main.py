@@ -10,12 +10,10 @@ init(128, 128, title="Nuit du Code")
 def update():
     global y, x
     move()
-    print(x)
-    print(y)
 
 def draw():
     global x, y
-    rect(x, y, 5, 5, 12)
+    rect(x, y, 5, 5, 7)
     cls(0)
    
 
