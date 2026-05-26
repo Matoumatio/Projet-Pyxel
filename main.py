@@ -1,9 +1,10 @@
 from pyxel import *
 from time import *
 from math import *
+# Le Double saut marche pas et ne parchera surement pas
 x = 64
 y = 64
-UP = [False, 0]
+UP = [False, 0, 1]
 RIGHT = [False, 0]
 LEFT = [False, 0]
 DOWN = [False,0]
@@ -23,7 +24,7 @@ def draw():
     global x, y
     cls(1)
     rect(x, y,8, 8, 7)
-    rect(0, 120, 128, 5, 3)
+    rect(0, 100, 128,  10, 3)
    
 
 def move():
@@ -32,12 +33,15 @@ def move():
         if UP[1] == 0 :
             UP[0] = False
             speed = 0
+            UP[2] = 1
         else :
             UP[1] -= 1
-            speed = speed + 0.8
+            speed = speed + 0.5
             y = y - speed
-    elif btn(KEY_UP) == True and DOWN[0] == False :
-        if UP[0] == False and DOWN[0] == False:
+            y = y//1
+    elif btn(KEY_UP) == True and DOWN[0] == False or (UP[2] == 1 and btn(KEY_UP)):
+        if UP[0] == False and DOWN[0] == False and UP[2] == 1 :
+            UP[2] = 0
             UP[0] = True
             UP[1] = 10    
     
@@ -66,7 +70,7 @@ def gravite():
     if UP[0] == False :
         if sol == False :
             DOWN[0] = True
-            speed_down = speed_down + 0.4
+            speed_down = speed_down + 0.5
             y = y + speed_down 
         if DOWN[0] == True and sol == True:
             DOWN[0] = False
@@ -77,8 +81,16 @@ def ground():
     sol = False
     w = pget(x + 3, y + 10)
     if w == 3 or w == 4 or w == 6 :
-        sol = True 
-        y = y//1
+        if w == 3 :
+            sol = True
+        if w == 4 or w == 6 :
+            while w != 3 :
+                y = y + 1
+                w = pget(x + 3, y + 10)
+            sol = True 
+        
+
+
    
 
 run(update, draw)
