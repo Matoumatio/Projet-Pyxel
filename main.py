@@ -11,10 +11,13 @@ DOWN = [False,0]
 speed = 0
 speed_down = 0
 sol = False
+
 init(128, 128, title="Nuit du Code")
+load("monjeu.pyxres")
 
 def update():
     global y, x
+    death()
     move()
     sol = False
     ground()
@@ -23,8 +26,8 @@ def update():
 def draw():
     global x, y
     cls(1)
+    bltm(0,0,0,0, 0, 128,128)
     rect(x, y,8, 8, 7)
-    rect(0, 100, 128,  10, 3)
    
 
 def move():
@@ -70,7 +73,7 @@ def gravite():
     if UP[0] == False :
         if sol == False :
             DOWN[0] = True
-            speed_down = speed_down + 0.5
+            speed_down = speed_down + 0.4
             y = y + speed_down 
         if DOWN[0] == True and sol == True:
             DOWN[0] = False
@@ -81,14 +84,15 @@ def ground():
     sol = False
     w = pget(x + 3, y + 10)
     if w == 3 or w == 4 or w == 6 :
-        if w == 3 :
             sol = True
-        if w == 4 or w == 6 :
-            while w != 3 :
-                y = y + 1
-                w = pget(x + 3, y + 10)
-            sol = True 
-        
+#Marche pas TT
+def death():
+    global x, y
+    print("YIPEPPPE")
+    a = pget(x, y)
+    if a == 8 :
+        x = 64
+        y = 64
 
 
    
