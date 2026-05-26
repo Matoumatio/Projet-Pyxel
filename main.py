@@ -1,5 +1,6 @@
 from pyxel import *
 from time import *
+from math import *
 x = 64
 y = 64
 UP = [False, 0]
@@ -77,15 +78,7 @@ def ground():
     w = pget(x + 3, y + 10)
     if w == 3 or w == 4 or w == 6 :
         sol = True 
-        
-
-
-
-
-
-
-        
-
-    
+        y = y//1
+   
 
 run(update, draw)
