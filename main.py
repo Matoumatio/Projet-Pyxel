@@ -21,7 +21,8 @@ def update():
 def draw():
     global x, y
     cls(1)
-    rect(x, y, 5, 5, 7)
+    rect(x, y,8, 8, 7)
+    rect(0, 120, 128, 5, 3)
    
 
 def move():
@@ -29,15 +30,10 @@ def move():
     if UP[0] == True :
         if UP[1] == 0 :
             UP[0] = False
+            speed = 0
         else :
             UP[1] -= 1
-            if speed == 4 or speed >= 4 :
-                if speed == 0 or speed <= 0 :
-                    speed += 0.4
-                else :
-                    speed = speed - 4
-            else :
-                speed = speed + 0.4
+            speed = speed + 0.8
             y = y - speed
     elif btn(KEY_UP) == True and DOWN[0] == False :
         if UP[0] == False and DOWN[0] == False:
@@ -69,22 +65,22 @@ def gravite():
     if UP[0] == False :
         if sol == False :
             DOWN[0] = True
-            if speed_down == 4 or speed_down >= 4 :
-                if speed_down == 0 or speed_down <= 0 :
-                    speed_down += 0.4
-                else :
-                    speed_down = speed_down - 4
-            else :
-                speed_down = speed_down + 0.4
+            speed_down = speed_down + 0.4
             y = y + speed_down 
         if DOWN[0] == True and sol == True:
             DOWN[0] = False
+            speed_down = 0
+
 def ground():
     global y, sol
     sol = False
-    if y > 64 :
-        sol = True
-        return True
+    w = pget(x + 3, y + 10)
+    if w == 3 or w == 4 or w == 6 :
+        sol = True 
+        
+
+
+
 
 
 
